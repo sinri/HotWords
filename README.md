@@ -6,6 +6,25 @@ The main function is to extract high-frequency words from a text.
 
 The toolkit is designed for English Education. It can lessen the barriers for reading by knowing those words in advance.
 
+## 20151006 JAR
+
+To analyze text in a file, use command as below:
+
+    java -jar HotWords.jar [FILE] [FILTER] [LEAST] [LIMIT]
+
+> FILE: the path to the target file;
+> FILTER: none or common (neglect the preset 1000 words in common use);
+> LEAST: the least times should a word appears;
+> LIMIT: the most frequent words;
+
+Example:
+
+    SinriMac:dist Sinri$ java -jar HotWords.jar README.TXT common 5 3
+    [CONCLUSION]
+    [file] Counts 10 Original Word: [file, files]
+    [jar] Counts 8 Original Word: [JAR, jar]
+    [folder] Counts 8 Original Word: [folder, folders]
+
 
 ## 20151005 PHP
 
