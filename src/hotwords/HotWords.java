@@ -28,6 +28,8 @@ public class HotWords {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
+//        testForStem();
+        
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
 
