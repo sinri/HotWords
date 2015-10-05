@@ -2,6 +2,13 @@
 
 Get hot words from certain text.
 
+
+## 20151005 PHP
+
+Rewrote the function into PHP. 
+
+You can do the same job on this [Interactive Page](http://www.everstray.com/hotwords/) now.
+
 ## 20151005 Mimei
 
 Run in NetBeans Terminal

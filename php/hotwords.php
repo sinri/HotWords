@@ -224,7 +224,7 @@ class HotWords {
         $l=strlen($s);//int l = s.length();
         $o=$this->j+1;//int o = j + 1;
         for ($inner_i = 0; $inner_i < $l; $inner_i++) {
-            substr_replace($this->b,substr($s,$inner_i,1),$o + $inner_i,1);
+            $this->b=substr_replace($this->b,substr($s,$inner_i,1),$o + $inner_i,1);
         }
         $this->k = $this->j + $l;
     }
@@ -296,7 +296,7 @@ class HotWords {
     /* step2() turns terminal y to i when there is another vowel in the stem. */
     private function step2() {
         if ($this->ends("y") && $this->vowelinstem()) {
-            substr_replace($this->b,'i',$this->k,1);//b[k] = 'i';
+            $this->b=substr_replace($this->b,'i',$this->k,1);//b[k] = 'i';
         }
     }
 
