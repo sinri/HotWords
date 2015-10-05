@@ -3,10 +3,13 @@ require_once(__DIR__.'/hotwords.php');
 // For any word, we can get the stem using Porter Stemmer Algorithm.
 // $stem=HotWords::wordNormalize($anyword);
 
+require_once(__DIR__.'/filter.php');
+
 $text=isset($_REQUEST['text'])?$_REQUEST['text']:'';
+$filter=isset($_REQUEST['filter'])?$_REQUEST['filter']:'';
 
 $HWA=new HotWordsAgent();
-$HWA->processText($text);
+$HWA->processText($text,$filter);
 
 /**
 * 
@@ -20,11 +23,24 @@ class HotWordsAgent
 	}
 
 	private $word_stat=array();
+	private $word_filter=null;
 
-	public function processText($text){
+	private function getWordFilter(){
+		if(!$this->word_filter){
+			$this->word_filter=new WordFilter();
+		}
+		return $this->word_filter;
+	}
+
+	public function processText($text,$filter_name=null){
 		$this->word_stat=array();
 		$words=preg_split('/[^A-Za-z]+/', $text);
 		foreach ($words as $word) {
+			if($filter_name=='common'){
+				if($this->getWordFilter()->isCommonWord($word)){
+					continue;
+				}
+			}
 			$this->register($word);
 		}
 		$this->stat();

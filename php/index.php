@@ -9,10 +9,16 @@
 	    	url: './api.php',
 	    	dataType: 'json',
 	    	data:{
-	    		text:$('#text').val()
+	    		text:$('#text').val(),
+	    		filter:$('#filter').val()
 	    	}
 		})
 		.done(function( data, textStatus, jqXHR ) {
+			var least=parseInt($('#leastInput').val());
+			if(least<1)least=1;
+			var top=parseInt($('#topInput').val());
+			if(top<0)top=0;
+
 			var html="";//"<pre>"+JSON.stringify(data)+"</pre>";
 			html=html+"<table>";
 			html=html+"<thead>";
@@ -26,12 +32,19 @@
 			html=html+"<tbody>";
 			var show_order=0;
 			var show_count=0;
-			for (var i =0; i< data.length; i++) {
+			var size=data.length;
+			// if(top>0 && size>top){
+			// 	size=top;
+			// }
+			for (var i =0; i< size; i++) {
 				if(show_order==0 || show_count!=data[i].times){
 					show_order=(i+1);
-					show_count=data[i].times
+					show_count=data[i].times;
+					if(top>0 && show_order>top){
+						break;
+					}
 				}
-				html=html+"<tr>";
+				html=html+"<tr"+(data[i].times>=least?'':' style="display:none;" ')+">";
 				html=html+"<td>"+(show_order)+"</td>";
 				html=html+"<td>"+data[i].stem+"</td>";
 				html=html+"<td>"+data[i].times+"</td>";
@@ -104,6 +117,13 @@
 		display: block;
 		background-color: black;
 	}
+	#option_bar {
+		width:100%;
+		margin: 10px auto;
+		padding: 10px 0px;
+		display: block;
+		border:1px solid white;
+	}
 	#result{
 		width: 80%;
 		height: auto;
@@ -175,6 +195,19 @@
 			(adsbygoogle = window.adsbygoogle || []).push({});
 			</script>
 		</div>
+		<div id="option_bar">
+			Choose Word Filter:
+			<select id="filter">
+				<option value="none">No Filter</option>
+				<option value="common">Filter the highest 1000 words</option>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			Least Frequency:
+			<input type="text" value="1" id="leastInput">
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			Top Limitation(0 for all):
+			<input type="text" value="0" id="topInput">
+		</div>
 		<div class="btn_span">
 			<a href="javascript:void(0);" class="btn btn-full-width" onclick='runHotWords()'>Submit to analyze</a>
 		</div>
@@ -185,6 +218,7 @@
 	<div id='footer'>
 		<p>View HotWords Project on <a href="https://github.com/sinri/HotWords">GitHub</a>.</p>
 		<p>Copyright 2015 Sinri Edogawa. Free for use but no guarantee for the result.</p>
+		<p>Best for 1366*768 or larger screen.</p>
 	</div>
 </body>
 </html>

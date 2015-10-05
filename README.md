@@ -1,6 +1,10 @@
 # HotWords
 
-Get hot words from certain text.
+A corpus analysis tool for concordancing and text analysis.
+
+The main function is to extract high-frequency words from a text.
+
+The toolkit is designed for English Education. It can lessen the barriers for reading by knowing those words in advance.
 
 
 ## 20151005 PHP
@@ -8,6 +12,8 @@ Get hot words from certain text.
 Rewrote the function into PHP. 
 
 You can do the same job on this [Interactive Page](http://www.everstray.com/hotwords/) now.
+
+You can choose to use Word Filter(Most Frequent 1000 words) or not. Also Least Frequency and Top Limitation(0 for all) are available now.
 
 ## 20151005 Mimei
 
